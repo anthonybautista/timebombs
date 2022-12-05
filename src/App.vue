@@ -268,8 +268,8 @@ export default {
       game: null,
       alias: null,
       timebombs: "0x27669989A5F9d6a4643F6afa4e5b888ffB274292",
-      userGameBombs: [new Bomb(999999,"/no-bomb.png")],
-      userTimebombs: [new Bomb(999999,"/no-bomb.png")],
+      userGameBombs: [new Bomb(999999,"@/assets/no-bomb.png")],
+      userTimebombs: [new Bomb(999999,"@/assets/no-bomb.png")],
       bombTimer: null,
       refreshController: false,
       form: {
