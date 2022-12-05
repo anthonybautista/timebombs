@@ -360,7 +360,7 @@ export default {
             }
           });
         } else {
-          bombs.push(new Bomb(99999,"/no-bomb.png",0,false));
+          bombs.push(new Bomb(99999,"@/assets/no-bomb.png",0,false));
         }
       }).catch(function (error) {
         console.error(error);
