@@ -315,6 +315,10 @@ export default {
       let address = "0x38C1Acc7bb26CD108E4DA34eC8CD48D05e02271f";
       this.game = await Game.setUpGame(this.gameId, address)
       setTimeout(this.reloadContainer, 1000);
+      setTimeout(await this.updateActive,30000);
+    },
+    updateActive: async function() {
+      this.game.activeBombs = await Game.getActive(this.gameAddress);
     },
     resetGame: function() {
       this.game = null;
@@ -447,8 +451,8 @@ export default {
       },
     },
     game: {
-      handler: async function(newAccount) {
-        if (newAccount) {
+      handler: async function(newGame) {
+        if (newGame) {
           if (this.account) {
             await this.getBombs(this.game.nftAddress);
             await this.getBombs(this.timebombs, 1);
