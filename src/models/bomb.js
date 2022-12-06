@@ -1,4 +1,4 @@
-import {getGameContract} from "@/utils/contract";
+import {getGameContract, getGameContractNoSigner} from "@/utils/contract";
 import {ethers} from "ethers";
 
 function Bomb(tokenId, pic) {
@@ -7,7 +7,7 @@ function Bomb(tokenId, pic) {
 }
 
 Bomb.bombInfo = async function (address, tokenId) {
-    let contract = getGameContract(address);
+    let contract = getGameContractNoSigner(address);
     return await contract.getBombInfo(tokenId);
 }
 

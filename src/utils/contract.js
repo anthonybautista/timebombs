@@ -18,10 +18,18 @@ export const getErc20Contract = (address) => {
     return getContract(erc20ABI, address, signer);
 }
 
+export const getErc20ContractNoSigner = (address) => {
+    return getContract(erc20ABI, address);
+}
+
 export const getGameContract = (address) => {
     const {library} = store.state.web3Modal;
     const signer = library.getSigner();
     return getContract(gameABI, address, signer);
+}
+
+export const getGameContractNoSigner = (address) => {
+    return getContract(gameABI, address);
 }
 
 export const getFireContract = () => {

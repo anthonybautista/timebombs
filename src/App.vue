@@ -22,6 +22,7 @@
       ></q-btn-toggle>
     </div>
     </q-header>
+
     <div class="buffer q-mt-xl"></div>
     <div v-if="selected === 'dash'">
       <game-info-container v-if="game" :game="game" :key="game" :error="dashError" @halt-game="halt" @reset-game="resetGame">
@@ -268,8 +269,8 @@ export default {
       game: null,
       alias: null,
       timebombs: "0x27669989A5F9d6a4643F6afa4e5b888ffB274292",
-      userGameBombs: [new Bomb(999999,"@/assets/no-bomb.png")],
-      userTimebombs: [new Bomb(999999,"@/assets/no-bomb.png")],
+      userGameBombs: [new Bomb(999999,require("@/assets/no-bomb.png"))],
+      userTimebombs: [new Bomb(999999,require("@/assets/no-bomb.png"))],
       bombTimer: null,
       refreshController: false,
       form: {
@@ -360,7 +361,7 @@ export default {
             }
           });
         } else {
-          bombs.push(new Bomb(99999,"@/assets/no-bomb.png",0,false));
+          bombs.push(new Bomb(99999,require("@/assets/no-bomb.png"),0,false));
         }
       }).catch(function (error) {
         console.error(error);

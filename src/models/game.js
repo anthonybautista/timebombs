@@ -1,4 +1,4 @@
-import {getGameContract} from "@/utils/contract";
+import {getGameContractNoSigner} from "@/utils/contract";
 
 function Game(gameId,
               nftAddress,
@@ -35,10 +35,10 @@ function Game(gameId,
 }
 
 Game.setUpGame = async function (gameId, address) {
-    let gameContract = getGameContract(address);
+    let gameContract = getGameContractNoSigner(address);
     let data = await gameContract.getGameInfo();
     let activeBombs = await gameContract.getActiveBombs();
-    console.log(data)
+
     return new Game(gameId,
         data[1],
         address,
@@ -58,7 +58,7 @@ Game.setUpGame = async function (gameId, address) {
 }
 
 Game.getActive = async function (address) {
-    let gameContract = getGameContract(address);
+    let gameContract = getGameContractNoSigner(address);
     return await gameContract.getActiveBombs();
 }
 
