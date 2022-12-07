@@ -6,6 +6,7 @@
           <p class="q-mb-xs">Bomb Timer</p>
           <p v-if="bombTimer > 0 && selectedBomb !== null" class="q-mb-none">{{ days }}:{{ hours }}:{{ minutes }}:{{ seconds }}</p>
           <p v-else-if="selectedBomb === null" class="q-mb-none">SELECT BOMB</p>
+          <p v-else-if="!gameStarted" class="q-mb-none">NOT STARTED</p>
           <p v-else class="q-mb-none">DETONATED</p>
         </div>
         <div id="bombSelectorDiv" class="bg-primary q-pa-sm q-mx-xs rounded-borders shadow-5">
@@ -35,7 +36,6 @@ export default {
   name: "Dashboard",
   data: function() {
     return {
-      gameStarted: Date.now() > this.game.startTime,
       selectedBomb: null,
     }
   },
@@ -76,6 +76,9 @@ export default {
     },
     activeBombs(){
       return this.game.activeBombs.length;
+    },
+    gameStarted(){
+      return Date.now() > this.game.startTime;
     },
   },
 
