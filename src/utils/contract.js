@@ -33,7 +33,8 @@ export const getGameContractNoSigner = (address) => {
 }
 
 export const getFireContract = () => {
-    return getContract(fireABI, "0x5adCD28C08Fdc5a913982391cebD866b27C717D4");
+    const provider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc");
+    return new ethers.Contract("0x5adCD28C08Fdc5a913982391cebD866b27C717D4", fireABI, provider);
 }
 
 const getContract = (abi, address, signer = null) => {

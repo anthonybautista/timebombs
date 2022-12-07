@@ -29,6 +29,13 @@
         <template v-slot:dash>
           <dashboard :game="game" :bomb-timer="bombTimer" @get-bomb-info="bombInfo"></dashboard>
         </template>
+<!--        TODO check for game tokens-->
+          <template v-slot:tokenOne v-if="!(Date.now() > this.game.startTime) && (this.game.useERC20 || this.game.feeERC20)">
+            <token-approve :approved="false" :token="tokenOne" balance="1000"/>
+          </template>
+          <template v-slot:tokenTwo v-if="!(Date.now() > this.game.startTime) && (this.game.useERC20 || this.game.feeERC20)">
+            <token-approve :approved="false" :token="tokenTwo" balance="10.09"/>
+          </template>
         <template v-slot:nfts>
           <n-f-t-container :nfts="userGameBombs" :key="refreshController" @reload="reloadContainer">
             <n-f-t-card v-for="item in userGameBombs" :key="item.tokenId" :nft="item">
@@ -36,7 +43,6 @@
             </n-f-t-card>
           </n-f-t-container>
         </template>
-        <p class="text-white">text</p>
       </game-info-container>
       <div v-else class="q-pa-md q-mt-xl q-mb-none flex justify-center">
         <q-banner rounded class="bg-accent text-white">
@@ -169,7 +175,7 @@
     <div v-else>
       <lab-container>
         <template v-slot:token>
-
+          <token-approve :approved="true" :token="linkToken" balance="100"></token-approve>
         </template>
         <template v-slot:nfts>
           <n-f-t-container :nfts="userTimebombs" :key="refreshController" @reload="reloadContainer">
@@ -218,6 +224,8 @@ import RulesContainer from "@/components/RulesContainer";
 import LabContainer from "@/components/LabContainer";
 import NFT from "@/models/nft";
 import TinkerCard from "@/components/TinkerCard";
+import TokenApprove from "@/components/TokenApprove";
+import Token from "@/models/token";
 
 export default {
   name: 'LayoutDefault',
@@ -230,6 +238,7 @@ export default {
   },
 
   components: {
+    TokenApprove,
     TinkerCard,
     LabContainer,
     RulesContainer,
@@ -268,9 +277,12 @@ export default {
       gameId: 0,
       game: null,
       alias: null,
-      timebombs: "0x27669989A5F9d6a4643F6afa4e5b888ffB274292",
+      timebombs: "0xd46B59F2F02C764128e7d6496e6824D3B24Ff784",
       userGameBombs: [new Bomb(999999,require("@/assets/no-bomb.png"))],
       userTimebombs: [new Bomb(999999,require("@/assets/no-bomb.png"))],
+      tokenOne: new Token('BOMB','0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'),
+      tokenTwo: new Token('WAVAX','0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'),
+      linkToken: new Token('LINK','0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846'),
       bombTimer: null,
       refreshController: false,
       form: {
@@ -312,13 +324,13 @@ export default {
     },
     setUpGame: async function() {
       // TODO setup gameId => address lookup
-      let address = "0x38C1Acc7bb26CD108E4DA34eC8CD48D05e02271f";
+      let address = "0x67b0A6597f6acA299957a96f7aF296FcFf6008A8";
       this.game = await Game.setUpGame(this.gameId, address)
       setTimeout(this.reloadContainer, 1000);
       setTimeout(await this.updateActive,30000);
     },
     updateActive: async function() {
-      this.game.activeBombs = await Game.getActive(this.gameAddress);
+      this.game.activeBombs = await Game.getActive(this.game.gameAddress);
     },
     resetGame: function() {
       this.game = null;

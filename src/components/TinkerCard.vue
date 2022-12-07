@@ -1,7 +1,12 @@
 <template>
   <better-timer :timestamp="Date.now() + 86400000"></better-timer>
   <p class="text-negative q-ma-none">{{this.errorMessage}}</p>
-  <q-card-section class="q-pb-sm">
+  <div v-if="this.bomb.staked" class="q-mt-sm">
+<!--    TODO check BOMB balance-->
+    <p class="q-ma-none">Claimable $BOMB</p>
+    <p class="q-ma-none">{{claimable}}</p>
+  </div>
+  <q-card-section class="q-pb-sm q-pt-sm">
     <q-btn class="bg-primary text-white" @click="tinker">Tinker</q-btn>
   </q-card-section>
   <q-card-section  v-if="this.bomb.staked" class="q-pt-none">
@@ -20,6 +25,7 @@ export default {
       errorMessage: "",
       provider: null,
       info: [],
+      claimable: 1000,
     }
   },
 
@@ -31,6 +37,7 @@ export default {
   },
 
   methods: {
+    // TODO implement claim and tinker
     async claim() {
       this.errorMessage = "Claiming..."
       setTimeout(() => {

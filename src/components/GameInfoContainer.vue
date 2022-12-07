@@ -24,9 +24,14 @@
       </div>
       <div class="flex justify-center">
         <q-btn v-if="allowHalt && gameStarted" color="negative" label="Halt Game" class="gameButton q-mt-sm shadow-5" @click="halt" :key="allowHalt"></q-btn>
+        <p v-else-if="!gameStarted && (this.game.useERC20 || this.game.feeERC20)">
+          This game uses at least one ERC20 Token. You must approve the token(s) to activate your bombs! (button will appear if not approved)
+        </p>
       </div>
     </q-banner>
   </div>
+  <slot name="tokenOne"></slot>
+  <slot name="tokenTwo"></slot>
   <slot name="nfts"></slot>
 </template>
 

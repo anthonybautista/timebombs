@@ -68,9 +68,8 @@ export default {
 
     async act() {
       this.errorMessage = "Activating Bomb..."
-      this.errorMessage = await Bomb.activateBomb(this.game.gameAddress, this.bomb.tokenId);
+      this.errorMessage = await Bomb.activateBomb(this.game, this.bomb.tokenId);
       this.info = await Bomb.bombInfo(this.game.gameAddress, this.bomb.tokenId);
-
     },
   },
 

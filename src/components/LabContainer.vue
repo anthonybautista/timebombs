@@ -8,6 +8,7 @@
         will see their claimable amount double every 24 hours until reaching a maximum 32,000 $BOMB!</p>
       <p>However, there's a catch! Each day villains must choose to continue tinkering, or claim their $BOMB tokens.
          Both of these options have a 20% chance of destroying all claimable $BOMB tokens! </p>
+      <p>Tinkering costs 0.02 LINK. You must approve the token to tinker (button will appear if not approved).</p>
     </q-banner>
   </div>
   <slot name="token"></slot>
