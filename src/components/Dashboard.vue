@@ -1,7 +1,6 @@
 <template>
   <div class="flex justify-center text-center bg-accent" id="itemContainer2">
     <q-banner class="bg-accent text-white q-ma-none q-pa-none">
-      <p class="q-mb-none">Active Bombs</p>
       <div id="gameBanner2" class="text-center">
         <div id="bombTimerDiv" class="bg-primary q-pa-sm q-mx-xs rounded-borders shadow-5">
           <p class="q-mb-xs">Bomb Timer</p>
@@ -14,6 +13,7 @@
           <p class="q-mb-none">{{selectedBomb}}</p>
         </div>
       </div>
+      <p class="q-mb-none q-mt-sm">Active Bombs</p>
       <div class="smolBombContainer bg-accent flex justify-center q-ma-l q-pa-md text-center rounded-borders">
         <q-img src="@/assets/bomb.png" class="smolBomb" v-for="bomb in this.game.activeBombs" @click="getTime(bomb)" :key="bomb">
           <p class="text-white flex flex-center bombText">

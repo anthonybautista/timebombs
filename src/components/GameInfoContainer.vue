@@ -18,6 +18,7 @@
           <p class="q-mb-none">{{remaining}}</p>
         </div>
       </div>
+      <q-separator class="full q-mb-sm" size="3px"/>
       <slot name="dash"></slot>
       <div class="bg-primary text-center q-mt-md" id="error">
         <p class="text-negative">{{this.error}}</p>
