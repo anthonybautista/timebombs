@@ -50,7 +50,9 @@ export default {
       } catch (e) {
         this.errorMessage = e;
       }
-
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 3000)
     },
 
     async updateInfo() {
@@ -64,12 +66,18 @@ export default {
       } else {
         this.errorMessage = "BOOM!";
       }
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 3000)
     },
 
     async act() {
       this.errorMessage = "Activating Bomb..."
       this.errorMessage = await Bomb.activateBomb(this.game, this.bomb.tokenId);
       this.info = await Bomb.bombInfo(this.game.gameAddress, this.bomb.tokenId);
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 3000)
     },
   },
 
